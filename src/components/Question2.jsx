@@ -6,12 +6,12 @@ const addInfo = (array) => {
   const newArray = array.map((item, index) => ({
     ...item,
     id: index,
-    answers: [...item.incorrect_answers],
+    answers: item.incorrect_answers,
   }));
 
   newArray.forEach((item) => {
     item.answers.splice(
-      Math.floor(Math.random() * array.length),
+      Math.floor(Math.random() * item.incorrect_answers.length),
       0,
       item.correct_answer
     );

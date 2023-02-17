@@ -5,7 +5,6 @@ const App = () => {
   return (
     <div className="trivia">
       <Question2 />
-      <h1>Hola</h1>
     </div>
   );
 };
