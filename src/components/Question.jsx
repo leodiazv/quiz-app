@@ -1,4 +1,3 @@
-import React from "react"
 
 const Question = ({ data, choose, handleChange, options, numQ }) => {
   return (
@@ -51,3 +50,4 @@ const Question = ({ data, choose, handleChange, options, numQ }) => {
 }
 
 export default Question
+import React from 'react';
