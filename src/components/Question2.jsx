@@ -54,9 +54,17 @@ function Question2() {
     setScore(correct);
   };
 
+  const resetQuestions = () => {
+    setQuestionsData([]);
+    setCorrectedAnswers({});
+    setScore();
+    getQuestions();
+  };
+
   return (
     <div>
       <h1>Preguntas</h1>
+      {questionsData.length === 0 && <p>Loading...</p>}
       <form onSubmit={setFinalScore}>
         {questionsData.map((question) => (
           <fieldset key={question.id}>
@@ -87,6 +95,9 @@ function Question2() {
       {score && (
         <p>{`Respuestas correctas ${score}/${questionsData.length}`} </p>
       )}
+      <button type="button" onClick={resetQuestions}>
+        Reiniciar
+      </button>
     </div>
   );
 }
