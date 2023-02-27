@@ -1,0 +1,29 @@
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: lighten(#332f35,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: white;
+  background: blue;
+}
+
+input[type=radio].correct + label {
+  color: white;
+  background: greenyellow;
+}
+
+input[type=radio].incorrect:checked + label{
+  color: white;
+  background: red;
+}

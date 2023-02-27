@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import RadioBtns from "./RadioBtns/RadioBtns";
 
 const API_URL = `https://opentdb.com/api.php?amount=5&category=20&difficulty=easy&type=multiple`;
 
@@ -20,10 +21,11 @@ const addInfo = (array) => {
   return newArray;
 };
 
-function Question2() {
+function Questions() {
   const [questionsData, setQuestionsData] = useState([]);
   const [correctedAnswers, setCorrectedAnswers] = useState({});
   const [score, setScore] = useState();
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const getQuestions = () => {
     fetch(API_URL)
@@ -52,12 +54,14 @@ function Question2() {
       if (correctedAnswers[key] === "correct") correct++;
     }
     setScore(correct);
+    setShowAnswer(true);
   };
 
   const resetQuestions = () => {
     setQuestionsData([]);
     setCorrectedAnswers({});
     setScore();
+    setShowAnswer(false);
     getQuestions();
   };
 
@@ -69,28 +73,14 @@ function Question2() {
         {questionsData.map((question) => (
           <fieldset key={question.id}>
             <legend>{question.question}</legend>
-            {question.answers.map((answer, index) => (
-              <div key={index}>
-                <label htmlFor={answer}>{answer}</label>
-                <input
-                  type="radio"
-                  id={answer}
-                  name={question.id}
-                  value={answer}
-                  onChange={(e) =>
-                    checkAnswer(
-                      e.target.value,
-                      question.correct_answer,
-                      question.id
-                    )
-                  }
-                  required
-                ></input>
-              </div>
-            ))}
+            <RadioBtns
+              question={question}
+              checkAnswer={checkAnswer}
+              showAnswer={showAnswer}
+            />
           </fieldset>
         ))}
-        <button type="submit">Comprobar</button>
+        {!showAnswer && <button type="submit">Comprobar</button>}
       </form>
       {score && (
         <p>{`Respuestas correctas ${score}/${questionsData.length}`} </p>
@@ -102,4 +92,4 @@ function Question2() {
   );
 }
 
-export default Question2;
+export default Questions;
